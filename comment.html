@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<head>
+	<title>sss</title>
+</head>
+<body>
+	<form id="form">
+comment:<textarea id="cmnt"></textarea>
+<button id="sub">submit</button>
+<button id="cls">clear</button>
+<p id="here"></p>
+</form>
+<script>
+	$(document).on('click','#sub',function () {
+		var item=$("#cmnt").val();
+		if (item!='')
+		{
+			$('#form')[0].reset();
+			$('p#here').prepend(item+"</br>");
+			var all=$('p#here').html();
+
+			localStorage.setItem("todolist",all);
+		}
+		else{
+			alert('please write something')
+		}
+		return false;
+	});
+	if (localStorage.getItem("todolist")) {
+		var listItem=localStorage.getItem('todolist');
+		$('p#here').html(listItem);
+	}
+
+	$(document).on('click','#cls',function(){
+		localStorage.removeItem("todolist");
+
+	});
+</script>
+</body>
+</html>
