@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style type="text/css">
+  #query{
+    border: 1px solid black;
+    float: center;
+    background-color: skyblue;
+    padding-left: 60px;
+  }
+  h1{
+    padding-top: 30px;
+    background: skyblue;
+    margin-top: 5px;
+    border: 1px groove black;
+    text-align: center;
+    height: 80px;
+  }
+  #hh{
+    text-align: center;
+    height: 50px;
+    background-color: lightgrey;
+    margin-top: 0px;
+    padding-top: 15px;
+    width: 800px;
+    margin-left: 0px;
+  }
+</style>
+<body>
+
+<h1>Clean Environment For Healthy Lifestyle</h1>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4" id="query">
+      <form id="form">
+      <h3 style="margin-left: 0px;">Enter the Query</h3></br>
+      Name:&nbsp;&nbsp;&nbsp;<input type="text" id="cmnt"></br></br>
+      Address:<input type="text" id="jk"></br></br>
+     <input type="file" name="pic" id="inpBilde" accept="image/*"></br>
+        <main id="main"></main> 
+
+  <input type="submit" id="sub" style="width: 240px;margin-bottom: 20px"></br>
+  <button id="cls" style="width: 240px;margin-bottom: 20px">clear</button>
+</form>
+  </div>
+    <div class="col-sm-8">
+      <h3 id="hh" style="margin-top: 0px;"><label>Dashboard</label></h3>
+      <input type="text" placeholder="search here"  size="20" style="width: 400px;height: 40px;margin-left: 140px;">
+<button style="width: 100px;height: 40px">submit</button>
+      <form id="form" style="margin-left: 300px;margin-top: 40px;">
+<p id="here" style="font-size: 40px"></p>
+<p id="ccd" style="font-size: 20px"></p>
+</form>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCMcYINKnT_61jJjd7mgMGRr7vjkZgrV7o",
+    authDomain: "new-clean.firebaseapp.com",
+    databaseURL: "https://new-clean.firebaseio.com",
+    projectId: "new-clean",
+    storageBucket: "new-clean.appspot.com",
+    messagingSenderId: "884505018765"
+  };
+  firebase.initializeApp(config);
+</script>
+<script>
+  let database=firebase.database();
+  let storage=firebase.storage();
+
+let inpBilde=document.getElementById('inpBilde');
+let main=document.getElementById('main');
+  let bildeurler=database.ref('bildeurler');
+
+  function largeURL(snap){
+    let url=snap.downloadURL;
+    bildeurler.push(url);
+  }
+
+  function lastOppBilde(){
+    let bilde=this.files[0];
+
+    let bildenavn=storage.ref("minefinebilder/" + new Date());
+    bildenavn.put(bilde).then(largeURL);
+
+  }
+  function visBilder(snap) {
+    let url=snap.val();
+    main.innerHTML+='<img src="${url}">';
+  }
+  inpBilde.onchange=lastOppBilde;
+  bildeurler.on("child_added",visBilder);
+</script>
+<script type="text/javascript">
+  $(document).on('click','#sub',function () {
+    var item=$("#cmnt").val();
+     var it=$("#jk").val();
+    if (item!='' || it!='')
+    {
+      $('#form')[0].reset();
+      $('p#here').prepend(item+"</br>");
+       $('p#ccd').prepend(it+"</br>");
+      var all=$('p#here').html();
+      var nun=$('p#ccd').html();
+      localStorage.setItem("todolist",all);
+      localStorage.setItem("dolist",nun);
+    }
+    else{
+      alert('please write something')
+    }
+    return false;
+  });
+  if (localStorage.getItem("todolist") || localStorage.getItem("dolist") ) {
+    var listItem=localStorage.getItem('todolist');
+    var lItem=localStorage.getItem('dolist');
+    $('p#here').html(listItem);
+     $('p#ccd').html(lItem);
+  }
+  $(document).on('click','#cls',function(){
+    localStorage.removeItem("todolist");
+  });
+  $(document).on('click','#cls',function(){
+    localStorage.removeItem("dolist");
+  });
+</script>
+</body>
+</html>
