@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title style="background-color: pink">Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style type="text/css">
+	#x{
+		background-color: linear
+	}
+#em{
+	width: 300px;
+	margin-left: 500px;
+}
+h1{
+	background-color: grey;
+	height: 60px;
+	margin-top: -10px;
+	padding-right: 40px;
+	color: white;
+}
+#ftr{
+	background-color: grey;
+	height: 40px;
+	text-align: center;
+	font-size: 25px;
+	padding-right: 40px;
+	color: white;
+}
+body{
+	background: linear-gradient(to left,skyblue,pink)	
+}
+</style>
+<body>
+	<div class="container-fluid">
+		<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title"><b>Login Here</b></h1>
+	               		<hr />
+	               	</div>
+	            </div> 
+		<div class="main-login main-center">
+<form class="form-horizontal" method="post" action="#" id="em">
+	<div class="form-group">
+		<label for="E-mail" class="cols-sm-2 control-label">E-mail:</label></br>
+		<div class="cols-sm-10" >
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+      <input id="email" type="email" class="form-control input-lg" name="email" placeholder="Email">
+      </div>
+       <b><div id="pl" style="color: red;"></div> </b>
+      </div> 
+  </div></br>
+  <div class="form-group">
+    <label for="Password" class="cols-sm-2 control-label">Password:</label></br>
+    <div class="cols-sm-10">
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input id="password" type="password" class="form-control input-lg" name="password" placeholder="Password">
+      </div>
+      <b><div id="el" style="color: red;"></div></b>
+  </div>
+</div></br>
+      <div class="form-group ">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="cc()"><b>Login</b></button>
+	</div>
+	<div class="form-group " id="x">
+							<button type="button" class="btn btn-danger btn-lg btn-block login-button" onclick="googleSignin()"><i class="fa fa-google">oogle Signin</b></i></button>
+	</div>
+	<div class="form-group ">
+							<a href="Home.html" style="text-decoration: none;"><button type="button" class="btn btn-success btn-lg btn-block login-button"><b>Continue as Visitor</b></button></a>
+	</div>
+    </div>
+</div>
+</form>
+<hr />
+<div class="container-fluid">
+	<footer id="ftr"><b>&copy;&nbsp;All Right Reserved</b></footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCMcYINKnT_61jJjd7mgMGRr7vjkZgrV7o",
+    authDomain: "new-clean.firebaseapp.com",
+    databaseURL: "https://new-clean.firebaseio.com",
+    projectId: "new-clean",
+    storageBucket: "",
+    messagingSenderId: "884505018765"
+  };
+  firebase.initializeApp(config);
+</script>
+<script type="text/javascript">
+	function cc(){
+	var ema=document.getElementById('email').value;
+	var pass=document.getElementById('password').value;
+	if (ema=="") 
+	{
+		var y="*Please Enter Proper E-mail ID*"
+		document.getElementById('pl').innerHTML=y;
+	}
+	else if (pass=="") 
+		{
+			var x="*Please Enter Proper Password*";
+			document.getElementById('el').innerHTML=x;
+		}
+		else{
+			var user = firebase.auth();
+			var usr = document.getElementById('email').value;
+			var pwd = document.getElementById('password').value;
+			user.signInWithEmailAndPassword(usr,pwd)
+			.then(function (currentUser){
+				alert("welcome you are Logged In.")
+				window.open("Home.html")
+			})
+			.catch(function (err) {
+					alert(err.message);
+			});
+			document.getElementById('email').value="";
+	document.getElementById('password').value="";
+		}
+	}
+	document.getElementById('email').value=""
+	document.getElementById('password').value="";
+		
+
+var provider = new firebase.auth.GoogleAuthProvider()
+function googleSignin() {
+   firebase.auth()
+   
+   .signInWithPopup(provider).then(function(result) {
+      var token = result.credential.accessToken;
+      var user = result.user;
+		
+      console.log(token)
+      console.log(user)
+   }).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+		
+      console.log(error.code)
+      console.log(error.message)
+   });
+}
+</script>
+</body>
+</html>
