@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>singup</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style type="text/css">
+	#x{
+		background-color: linear
+	}
+#em{
+	width: 300px;
+	margin-left: 500px;
+}
+h1{
+	background-color: grey;
+	height: 60px;
+	margin-top: -10px;
+	padding-right: 40px;
+	color: white;
+}
+#ftr{
+	background-color: grey;
+	height: 40px;
+	text-align: center;
+	font-size: 25px;
+	padding-right: 40px;
+	color: white;
+}
+body{
+	background: linear-gradient(to left,lightgreen,pink,skyblue)
+}
+</style>
+<body>
+<div class="container-fluid" >
+	<div class="row main">
+				<div class="panel-heading">
+	               <div class="panel-title text-center">
+	               		<h1 class="title"><b>Signup Here</b></h1>
+	               		<hr />
+	               	</div>
+				</div>	            
+<div class="main-login main-center">
+<form class="form-horizontal" method="post" action="Login.html" id="em" target="_self" >
+	<div class="form-group">
+		<label for="E-mail" class="cols-sm-2 control-label">Enter Name:&nbsp;<b style="color: red">*&nbsp;</b></label></br>
+		<div class="cols-sm-10" >
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+      <input id="nam" type="text" class="form-control input-lg" name="email" placeholder="Enter Name">
+      </div>
+       <b><div id="en" style="color: red;"></div></b> 
+      </div> 
+  </div></br>
+	<div class="form-group">
+		<label for="E-mail" class="cols-sm-2 control-label">E-mail:&nbsp;<b style="color: red">*&nbsp;</b></label></br>
+		<div class="cols-sm-10" >
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span> 
+      <input id="email" type="email" class="form-control input-lg" name="email" placeholder="Email">
+      </div>
+       <b><div id="ee" style="color: red;"></div> </b>
+      </div> 
+  </div></br>
+  <div class="form-group">
+    <label for="Password" class="cols-sm-2 control-label">Password:&nbsp;<b style="color: red">*&nbsp;</b></label></br>
+    <div class="cols-sm-10">
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input id="password" type="password" class="form-control input-lg" name="password" placeholder="Password">
+      </div>
+      <b><div id="ps" style="color: red;"></div></b> 
+  </div>
+</div></br>
+<div class="form-group">
+		<label for="E-mail" class="cols-sm-2 control-label">REentre-Password:&nbsp;<b style="color: red">*&nbsp;</b></label></br>
+		<div class="cols-sm-10" >
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
+      <input id="repass" type="password" class="form-control input-lg" name="email" placeholder="Reenter-Password">
+      </div>
+       <b><div id="rp" style="color: red;"></div></b> 
+      </div> 
+  </div></br>
+  <div class="form-group">
+		<label for="E-mail" class="cols-sm-2 control-label">Mobile-Number:&nbsp;<b style="color: red">*&nbsp;</b></label></br>
+		<div class="cols-sm-10" >
+    <div class="input-group">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span> 
+      <input id="mobnum" type="email" class="form-control input-lg" name="email" placeholder="Mobile-Number">
+      </div>
+       <b><div id="mn" style="color: red;"></div> </b>
+      </div> 
+  </div></br>
+      <div class="form-group ">
+							<button type="button" class="btn btn-primary btn-lg btn-block login-button" onclick="pk()"><b>Signup</b></button>
+	</div>
+	<div class="form-group ">
+							<a href="Home.html" style="text-decoration: none;"><button type="button" class="btn btn-success btn-lg btn-block login-button"><b>Continue as Visitor</b></button></a>
+	</div>
+    </div>
+</div>
+</form>
+<hr />
+<div class="container-fluid">
+	<footer id="ftr"><b>&copy;&nbsp;All Right Reserved</b></footer>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCMcYINKnT_61jJjd7mgMGRr7vjkZgrV7o",
+    authDomain: "new-clean.firebaseapp.com",
+    databaseURL: "https://new-clean.firebaseio.com",
+    projectId: "new-clean",
+    storageBucket: "",
+    messagingSenderId: "884505018765"
+  };
+  firebase.initializeApp(config);
+</script>
+<script type="text/javascript">
+	function pk() {
+		var a=document.getElementById('nam').value;
+		var b=document.getElementById('email').value;
+		var c=document.getElementById('password').value;
+		var d=document.getElementById('repass').value;
+		var e=document.getElementById('mobnum').value;
+		if (a=="")
+		{
+			var i="*Please Enter Username*";
+			document.getElementById('en').innerHTML=i;
+		}
+		else if (b=="") 
+		{
+			var q="*Please Enter E-mail*";
+			document.getElementById('ee').innerHTML=q;
+		}
+		else if (c=="") 
+		{
+		var p="*Please Enter Password*";
+			document.getElementById('ps').innerHTML=p;	
+		}
+		else if (d=="")
+		 {
+		 		var x="*Please Enter Re-Password*";
+			document.getElementById('rp').innerHTML=x;
+		}
+		else if(e=="")
+		{
+			var y="*Please Enter Mobile-Number*";
+			document.getElementById('mn').innerHTML=y;
+		}
+		else
+		{
+			var user = firebase.auth();
+			var b=document.getElementById('email').value;
+			var c=document.getElementById('password').value;
+			user.createUserWithEmailAndPassword(b,c);
+			var a=document.getElementById('nam').value;
+			var e=document.getElementById('mobnum').value;
+			var firebaseData = firebase.database().ref().child('user');
+			    firebaseData.push().set(a);
+			    firebaseData.push().set(e);
+			alert("thanks")
+			document.getElementById('nam').value="";
+		document.getElementById('email').value="";
+		document.getElementById('password').value="";
+		document.getElementById('repass').value="";
+		document.getElementById('mobnum').value="";
+		}
+	}
+	document.getElementById('nam').value="";
+		document.getElementById('email').value="";
+		document.getElementById('password').value="";
+		document.getElementById('repass').value="";
+		document.getElementById('mobnum').value="";
+</script>
+</body>
+</html>
